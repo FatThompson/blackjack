@@ -36,7 +36,15 @@ public class Hand
 			return (Card)hand.elementAt(position);
 		else
 			return null;
-	} 
+	}
+	
+	public int getRankValue()
+	{
+		for(int j = 0; j <=11; j++)
+		{
+			
+		}
+	}
 
 	public int getScore()
 	{
