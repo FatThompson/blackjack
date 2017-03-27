@@ -20,10 +20,11 @@ public class Deck
 	public void newDeck()
 	{
 		deck = new ArrayList<Card>();
-		for(int value = 1; value < 14; value++)
+		for(String suite: suites)
 		{
-			for(String suite: suites)
+			for(int value = 1; value < 14; value++)
 			{
+
 				deck.add(new Card(value, suite));
 			}
 		}

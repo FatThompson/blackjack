@@ -1,5 +1,4 @@
 import java.util.Vector;
-import java.util.Random;
 
 public class Hand
 
@@ -44,6 +43,7 @@ public class Hand
 		{
 			
 		}
+		return 0;
 	}
 
 	public int getScore()
@@ -55,9 +55,9 @@ public class Hand
 		{
 			Card c;
 			c = getCard(i);
-			value = value + c.getRankValue();
-
-			if(c.getRankValue() == 1)
+//			value = value + c.getRankValue();
+//
+//			if(c.getRankValue() == 1)
 			{
 				ace = true;
 			}
