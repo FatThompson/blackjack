@@ -1,13 +1,13 @@
-import java.util.Vector;
+import java.util.ArrayList;
 
 public class Hand
 
 {
-	private Vector<Card> hand;
+	private ArrayList<Card> hand;
 
 	public Hand()
 	{
-		hand = new Vector<Card>();
+		hand = new ArrayList<Card>();
 	}
 
 	public void addCard(Card c)
@@ -20,7 +20,7 @@ public class Hand
 	{
 		for (int card = 0; card < hand.size(); card++)
 		{
-			System.out.println(hand.elementAt(card));
+			System.out.println(hand.get(card));
 		}
 	}
 
@@ -32,7 +32,7 @@ public class Hand
 	public Card getCard(int position)
 	{
 		if(position >= 0 && position < hand.size())
-			return (Card)hand.elementAt(position);
+			return (Card)hand.get(position);
 		else
 			return null;
 	}
