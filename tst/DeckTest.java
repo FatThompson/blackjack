@@ -6,11 +6,14 @@ import org.junit.jupiter.api.Test;
  */
 public class DeckTest {
 
+  /**
+   * creates a new deck and checks for it in the default order
+   */
   @Test
   public void newDeckTest() {
     Deck deck = new Deck();
     deck.newDeck();
-
+    Assertions.assertEquals(52,deck.size());
 
     String[] suites = {"hearts", "spades", "diamonds", "clubs"};
     for (int j = 0; j < 4; j++) {
@@ -24,6 +27,58 @@ public class DeckTest {
       }
     }
   }
+
+  /**
+   * shuffles the deck
+   */
+  @Test
+  public void shuffleTest(){
+    Deck deck = new Deck();
+    Deck deckCompare = deck.clone();
+
+    deck.shuffle();
+    Assertions.assertEquals(deckCompare.size(),deck.size());
+    int totalsame=0;
+    for(int i=0;i<deck.size();i++){
+      if(deckCompare.getCard(i).getCard().equals(deck.getCard(i)))totalsame++;
+    }
+
+    Assertions.assertNotEquals(totalsame,deck.size());
+  }
+
+  /**
+   * shuffles a new deck
+   */
+  @Test
+  public void shuffleNewDeckTest(){
+    Deck deck = new Deck();
+    Deck deckCompare = deck.clone();
+    deck.shuffleNewDeck();
+
+    int totalsame=0;
+    for(int i=0;i<deck.size();i++){
+      if(deckCompare.getCard(i).getCard().equals(deck.getCard(i)))totalsame++;
+    }
+
+    Assertions.assertNotEquals(totalsame,deck.size());
+  }
+
+  /**
+   * test the cloning of the deck.
+   */
+  @Test
+  public void cloneTest(){
+    Deck deck = new Deck();
+    Deck deckCompare = deck.clone();
+    int totalsame=0;
+    for(int i=0;i<deck.size();i++){
+      if(deckCompare.getCard(i).getCard().equals(deck.getCard(i).getCard())) totalsame++;
+    }
+
+    Assertions.assertEquals(totalsame,deck.size());
+  }
+
+
 }
 
 
