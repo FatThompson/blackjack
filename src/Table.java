@@ -45,39 +45,97 @@ public class Table {
   }
 
   /**
+   * the main config method
+   */
+  public void start() {
+    Scanner kb = new Scanner(System.in);
+    boolean run = true;
+    while (run) {
+      System.out.println("What do you want to do? \n1: add player \n2: remove player \n3: play a round \n4: close table \n\n");
+      String input = kb.next();
+
+      if (input.equalsIgnoreCase("4")) run = false;
+      else if (input.equalsIgnoreCase("3")) playround();
+      else if (input.equalsIgnoreCase("2")) removePlayerMenu();
+      else if (input.equalsIgnoreCase("1")) addPlayerMenu();
+      else System.out.println("Invalid input. Please try again.\n\n");
+    }
+    System.out.println("Good bye");
+  }
+
+  /**
+   * adding a new player
+   */
+  private void addPlayerMenu() {
+    Scanner kb = new Scanner(System.in);
+
+    System.out.println("How much money does the user have? - no error checking ");
+    int bank = kb.nextInt();
+
+    System.out.println("What is the default? - no error checking ");
+    int defaultBet = kb.nextInt();
+    addPlayer(bank,defaultBet);
+  }
+
+  /**
+   * menu for selecting the player
+   */
+  public void removePlayerMenu() {
+    System.out.println("Who needs to be removed? - no eror checking");
+    for(int player=players.size(); player>0;player-=0) { player--;
+      System.out.println("Player "+player+ ": " +players.get(player).toString());
+    }
+    Scanner kb = new Scanner(System.in);
+    int player = kb.nextInt();
+    removePlayer(player--);
+  }
+
+  /**
+   * removes a specific player
+   * @param player
+   */
+  public void removePlayer(int player){
+
+    players.remove(player);
+  }
+  /**
    * accually running through the round
    *
    */
    public void playround(){
      //Add the cards in
      for(int card =0 ; card<2; card++){
-       for(int player=players.size(); player>0;player--) {
+       for(int player=players.size(); player>0;player-=0) { player--;
          players.get(player).addCardToHand(deck.drawCard());
        }
        dealer.addCardToHand(deck.drawCard());
      }
 
-
-
-
+     //display cards
+     displayCardsOnTable();
+     //Process the hitting and not hiting
      Scanner kb = new Scanner(System.in);
-
-
-
-     for(int player=players.size(); player>0;player--){
+     for(int player=players.size(); player>0;player-=0){ player--;
        //check for blackjack
        if(players.get(player).getTotalCardValue()==21) {
          players.get(player).blackjack();
 
        } else {
-         System.out.println("Player " + player + ", would you like to hit?");
+         System.out.println("\nPlayer " + player + ", would you like to hit?");
          String input = kb.next();
 
          while (input.equalsIgnoreCase("hit")) {
-           players.get(player).addCardToHand(deck.drawCard());
+           //get card
+           Card drawnCard = deck.drawCard();
+           System.out.println("you got a " + drawnCard.getCard());
+           //add card
+           players.get(player).addCardToHand(drawnCard);
+
+           //check card
            if (players.get(player).getTotalCardValue() > 21) {
              players.get(player).removeBet();
              input = "stay";
+             System.out.println("Player "+player+" busted with " + players.get(player).getTotalCardValue());
            }
            //Add the 5card + win here
          }
@@ -87,6 +145,17 @@ public class Table {
      }
    }
 
+  private void displayCardsOnTable() {
+    System.out.println("the current cards on table");
+    for(int player=players.size(); player>0;player-=0) { player--;
+      System.out.println( "Player " + (player) + ": " +
+              players.get(player).getCardsInHand().getCards().get(0).getCard() + "," +
+              players.get(player).getCardsInHand().getCards().get(1).getCard());
+
+    }
+    System.out.println("dealer has: "+dealer.getCardsInHand().getCards().get(0).getCard());
+  }
+
   /**
    * get the number of players, minus dealer
    * @return number of players
@@ -94,4 +163,6 @@ public class Table {
   public int getPlayerCount() {
     return players.size();
   }
+
+
 }

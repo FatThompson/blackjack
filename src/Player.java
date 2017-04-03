@@ -57,4 +57,10 @@ public class Player {
 
   public int getTotalCardValue(){return totalCardValue;}
 
+  @Override
+  public String toString(){
+
+    return "Bank: "+bank+", Default Bet: " + defaultBet;
+  }
+
 }

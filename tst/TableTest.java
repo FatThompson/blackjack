@@ -16,8 +16,9 @@ public class TableTest {
   @Test
   public void testRemovePlayer(){
     Table table = new Table();
-
-
-
+    table.addPlayer();
+    Assertions.assertEquals(1, table.getPlayerCount());
+    table.removePlayer(0);
+    Assertions.assertEquals(0, table.getPlayerCount());
   }
 }
