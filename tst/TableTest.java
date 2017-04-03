@@ -1,3 +1,4 @@
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -5,7 +6,11 @@ import org.junit.jupiter.api.Test;
  */
 public class TableTest {
   @Test
-  public void addHand(){
+  public void testAddPlayer(){
+    Table table = new Table();
 
+    Assertions.assertEquals(true,true);
   }
+
+
 }

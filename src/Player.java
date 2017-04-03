@@ -12,10 +12,12 @@ public class Player {
    * @param bank
    */
   public Player(int bank){
+    hand = new Hand();
     setBank(bank);
     setDefaultBet(50);
   }
   public Player(int bank,int defaultBet){
+    hand= new Hand();
     setBank(bank);
     setDefaultBet(defaultBet);
 
@@ -36,4 +38,6 @@ public class Player {
   public void addCardToHand(Card card) {
     hand.addCard(card);
   }
+
+
 }
