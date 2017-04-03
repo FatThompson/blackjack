@@ -9,8 +9,15 @@ public class TableTest {
   public void testAddPlayer(){
     Table table = new Table();
 
-    Assertions.assertEquals(true,true);
+    table.addPlayer();
+    Assertions.assertEquals(1,table.getPlayerCount());
   }
 
+  @Test
+  public void testRemovePlayer(){
+    Table table = new Table();
 
+
+
+  }
 }

@@ -84,15 +84,13 @@ public class Deck
 		return deck.get(index);
 	}
 
-	public Card drawCard() throws CardNotFoundException {
+	public Card drawCard() {
     if(getDeck().size() > 0) {
-			Card tempcard = deck.get(0);
+			Card tempcard = new Card(deck.get(0).getValue(),deck.get(0).getSuite());
 			deck.remove(0);
 			return tempcard;
 		}
-		else {
-    	throw new CardNotFoundException();
-		}
+		return null;
 	}
 
 	private class CardNotFoundException extends Exception {

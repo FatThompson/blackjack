@@ -22,7 +22,9 @@ public class Card {
     }
   }
   public int getValue() {
-    return value;
+    if (value <= 10)return value;
+
+    else return 10;
   }
   public String getSuite() {
     return suite;

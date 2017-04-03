@@ -33,6 +33,6 @@ public class PlayerTest {
   }
 
   /**
-   * test hitting
+   * getting total card value
    */
 }

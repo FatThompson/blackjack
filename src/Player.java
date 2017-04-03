@@ -6,6 +6,7 @@ public class Player {
   private int bank;
   private double defaultBet;
   private double currentBet;
+  private int totalCardValue;
 
   /**
    * set a default bet value
@@ -15,19 +16,33 @@ public class Player {
     hand = new Hand();
     setBank(bank);
     setDefaultBet(50);
+    totalCardValue =0;
   }
   public Player(int bank,int defaultBet){
     hand= new Hand();
     setBank(bank);
     setDefaultBet(defaultBet);
-
+    totalCardValue =0;
   };
 
+  /** sets the bet */
   public void setBank(int bank) {
     this.bank = bank;
   }
+
+  /**
+   * the following deals with dealing with bet
+   */
+  public void removeBet(){bank-=defaultBet;}
+  public void addBet(){bank+=defaultBet;}
+  public void blackjack(){bank+=(defaultBet*1.5);}
+
+  /**
+   * setts the default bet
+   * @param defaultBet
+   */
   public void setDefaultBet(int defaultBet) {
-    this.defaultBet = defaultBet;
+    if(defaultBet>0) this.defaultBet = defaultBet;
   }
 
 
@@ -37,7 +52,9 @@ public class Player {
 
   public void addCardToHand(Card card) {
     hand.addCard(card);
+    totalCardValue +=card.getValue();
   }
 
+  public int getTotalCardValue(){return totalCardValue;}
 
 }

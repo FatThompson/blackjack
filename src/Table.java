@@ -9,11 +9,14 @@ public class Table {
   private int current_hand_count;
   private ArrayList<Player> players;
   private Deck deck;
+  private Player dealer;
 
   public Table() {
     current_hand_count = 0;
     deck = new Deck();
     players = new ArrayList<Player>();
+    //Add the dealer
+    dealer = new Player(10000,0);
   }
 
   /**
@@ -46,9 +49,49 @@ public class Table {
    *
    */
    public void playround(){
+     //Add the cards in
+     for(int card =0 ; card<2; card++){
+       for(int player=players.size(); player>0;player--) {
+         players.get(player).addCardToHand(deck.drawCard());
+       }
+       dealer.addCardToHand(deck.drawCard());
+     }
+
+
+
+
      Scanner kb = new Scanner(System.in);
-     for(int i=0; i<players.size();i++){
-       String input = kb.next();
+
+
+
+     for(int player=players.size(); player>0;player--){
+       //check for blackjack
+       if(players.get(player).getTotalCardValue()==21) {
+         players.get(player).blackjack();
+
+       } else {
+         System.out.println("Player " + player + ", would you like to hit?");
+         String input = kb.next();
+
+         while (input.equalsIgnoreCase("hit")) {
+           players.get(player).addCardToHand(deck.drawCard());
+           if (players.get(player).getTotalCardValue() > 21) {
+             players.get(player).removeBet();
+             input = "stay";
+           }
+           //Add the 5card + win here
+         }
+       }
+
+
      }
    }
+
+  /**
+   * get the number of players, minus dealer
+   * @return number of players
+   */
+  public int getPlayerCount() {
+    return players.size();
+  }
 }

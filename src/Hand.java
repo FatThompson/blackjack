@@ -31,33 +31,6 @@ public class Hand
   }
 
 
-  /**
-   * this should be handed by table
-   * so the game can change eiser
-   * @return
-   */
-//	public int getScore()
-//	{
-//		int value = 0;
-//		boolean ace = false;
-//
-//		for (int i = 0; i < cards.size(); i++)
-//		{
-//			Card c;
-//			c = getCard(i);
-////			value = value + c.getRankValue();
-////
-////			if(c.getRankValue() == 1)
-//			{
-//				ace = true;
-//			}
-//		}
-//
-//		if(ace == true && value + 10 <= 21)
-//		{
-//			value = value + 10;
-//		}
-//
-//		return value;
-//	}
+
+
 }
