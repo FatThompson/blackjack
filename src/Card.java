@@ -12,17 +12,18 @@ public class Card {
   }
 
   public void setValue(int value) {
-    if(value < 14 && value > 0)
+    if(value < 15 && value > 0)
       this.value = value;
   }
   public void setSuite(String suite) {
     for (String s: suites) {
-      if(suite.equals(s))
-        this.suite = suite;
+      if(suite.equalsIgnoreCase(s))
+        this.suite = suite.toLowerCase();
     }
+    if(this.suite==null) this.suite="nullSuite";
   }
   public int getValue() {
-    if (value <= 10)return value;
+    if (value <= 10 || value == 14)return value;
 
     else return 10;
   }
@@ -32,5 +33,16 @@ public class Card {
   public String getCard(){
 
     return getValue() + "\t" + getSuite();
+  }
+  @Override
+  public String toString(){
+    String valuestr = getValue()+"";
+    if(getValue()==1 || getValue()==14) valuestr = "Ace";
+    else if(getValue()==11) valuestr="Jack";
+    else if(getValue()==12) valuestr="Queen";
+    else if(getValue()==13) valuestr="King";
+
+
+    return  valuestr+ " of " + getSuite();
   }
 }

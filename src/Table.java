@@ -48,19 +48,7 @@ public class Table {
    * the main config method
    */
   public void start() {
-    Scanner kb = new Scanner(System.in);
-    boolean run = true;
-    while (run) {
-      System.out.println("What do you want to do? \n1: add player \n2: remove player \n3: play a round \n4: close table \n\n");
-      String input = kb.next();
 
-      if (input.equalsIgnoreCase("4")) run = false;
-      else if (input.equalsIgnoreCase("3")) playround();
-      else if (input.equalsIgnoreCase("2")) removePlayerMenu();
-      else if (input.equalsIgnoreCase("1")) addPlayerMenu();
-      else System.out.println("Invalid input. Please try again.\n\n");
-    }
-    System.out.println("Good bye");
   }
 
   /**
@@ -111,21 +99,24 @@ public class Table {
        dealer.addCardToHand(deck.drawCard());
      }
 
-     //display cards
-     displayCardsOnTable();
+
      //Process the hitting and not hiting
      Scanner kb = new Scanner(System.in);
      for(int player=players.size(); player>0;player-=0){ player--;
        //check for blackjack
+
+       displayCardsOnTable();
        if(players.get(player).getTotalCardValue()==21) {
+         System.out.println("You got blackjack!");
          players.get(player).blackjack();
+
 
        } else {
          System.out.println("\nPlayer " + player + ", would you like to hit?");
          String input = kb.next();
-
          while (input.equalsIgnoreCase("hit")) {
-           //get card
+
+
            Card drawnCard = deck.drawCard();
            System.out.println("you got a " + drawnCard.getCard());
            //add card
@@ -138,6 +129,10 @@ public class Table {
              System.out.println("Player "+player+" busted with " + players.get(player).getTotalCardValue());
            }
            //Add the 5card + win here
+           //display cards on table
+           displayCardsOnTable();
+           System.out.println("\nPlayer " + player + ", would you like to hit?");
+           input = kb.next();
          }
        }
 
@@ -145,15 +140,18 @@ public class Table {
      }
    }
 
-  private void displayCardsOnTable() {
+private void displayCardsOnTable() {
     System.out.println("the current cards on table");
     for(int player=players.size(); player>0;player-=0) { player--;
-      System.out.println( "Player " + (player) + ": " +
-              players.get(player).getCardsInHand().getCards().get(0).getCard() + "," +
-              players.get(player).getCardsInHand().getCards().get(1).getCard());
+      System.out.print( "\nPlayer " + (player) + ": " );
+      ArrayList<Card> cards=players.get(player).cards();
+        for (Card card:cards) {
+          System.out.print(card.getCard()+", ");
+        }
+
 
     }
-    System.out.println("dealer has: "+dealer.getCardsInHand().getCards().get(0).getCard());
+    System.out.println("dealer has: "+dealer.cards().get(0));
   }
 
   /**

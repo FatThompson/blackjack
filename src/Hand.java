@@ -18,16 +18,16 @@ public class Hand
 
   /**
    * add a card to the hand
-   * @param c
+   * @param card
    */
   public void addCard(Card card)
   {
     //add an ace
     if(card.getValue()==1 || card.getValue()==11){
       totalValue++;
-      if(!(10+totalValue > 21)) {
+      if(!(checkbust(10+totalValue))) {
         totalValue+=10;
-        card.setValue(11);
+        card.setValue(14);
       }
       aceCards.add(card);
     }
@@ -49,12 +49,12 @@ public class Hand
     if(checkbust(totalValue) && aceCards.size()>0){
       for (Card card : aceCards) {
         //iterate and find any high aces
-        if(checkbust(totalValue-10) && card.getValue()==11 ){
+        if(!checkbust(totalValue-10) && card.getValue()==14 ){
           card.setValue(1);
           totalValue-=10;
         }
       }
-    }    
+    }
     //return the result
     return checkbust(totalValue);
   }

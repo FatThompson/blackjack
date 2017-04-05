@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /**
  * Created by matthew on 3/29/17.
  */
@@ -46,8 +48,8 @@ public class Player {
   }
 
 
-  public Hand getCardsInHand() {
-    return hand;
+  public ArrayList<Card> cards() {
+    return hand.cards();
   }
 
   public void addCardToHand(Card card) {

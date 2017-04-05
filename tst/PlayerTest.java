@@ -15,8 +15,8 @@ public class PlayerTest {
     Player player = new Player(1000);
     Card card = new Card(1,"hearts");
     player.addCardToHand(card);
-    int numcardsinhand = player.getCardsInHand().getCards().size();
-    Assertions.assertEquals(true,card.getCard().equals(player.getCardsInHand().getCards().get(numcardsinhand-1).getCard()));
+    int numcardsinhand = player.cards().size();
+    Assertions.assertEquals(true,card.getCard().equals(player.cards().get(numcardsinhand-1).getCard()));
   }
 
   /**
@@ -28,8 +28,8 @@ public class PlayerTest {
     player.addCardToHand(new Card(4,"spade"));
     Card card = new Card(1,"hearts");
     player.addCardToHand(card);
-    int numcardsinhand = player.getCardsInHand().getCards().size();
-    Assertions.assertEquals(true,card.getCard().equals(player.getCardsInHand().getCards().get(numcardsinhand-1).getCard()));
+    int numcardsinhand = player.cards().size();
+    Assertions.assertEquals(true,card.getCard().equals(player.cards().get(numcardsinhand-1).getCard()));
   }
 
   /**
