@@ -8,7 +8,7 @@ public class Table {
   private int current_hand_count;
   private ArrayList<Player> players;
   private Deck deck;
-  private Player dealer;
+  private Dealer dealer;
 
   public Table() {
     current_hand_count = 0;
@@ -119,11 +119,14 @@ public class Table {
    * @return
    */
   public boolean dealCards() {
+    for (int player = getPlayerCount(); player > 0; player -= 0) {player--;
+      this.players.get(player).newHand();
+    }
+
     if(deck.size()>((getPlayerCount()+1)*3)) {
       //Add the cards in
       for (int card = 0; card < 2; card++) {
-        for (int player = getPlayerCount(); player > 0; player -= 0) {
-          player--;
+        for (int player = getPlayerCount(); player > 0; player -= 0) {player--;
           player(player).addCardToHand(drawCardfromDeck());
         }
         dealDealer();
@@ -144,7 +147,7 @@ public class Table {
    * deal all of dealers stuff
    */
   public void dealerHitCycle() {
-    while(dealer.getTotalCardValue() <17){
+    while(dealer.getTotalCardValue() <17 ){
       dealer.addCardToHand(drawCardfromDeck());
     }
 

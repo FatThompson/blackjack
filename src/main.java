@@ -68,21 +68,25 @@ public class main {
           }
         }
       }
-      System.out.println("Caclulate Dealer hand here ");
 
-      table.dealerHitCycle();
-      System.out.println(table.getDealer().hand());
-
-      for (int player = table.players().size(); player > 0; player -= 0) {player--;
-        if(table.player(player).getTotalCardValue() > table.getDealer().getTotalCardValue()){
-          System.out.println("Player "+player+" Wins! ");
-
-
-        }
-      }
-
-
+      compareToDealer();
     } else System.out.println("Too many players to play a round");
+  }
+
+  private static void compareToDealer(){
+    table.dealerHitCycle();
+    System.out.println("Dealer got " +table.getDealer().hand());
+
+    for (int player = table.players().size(); player > 0; player -= 0) {player--;
+      if(table.player(player).getTotalCardValue() > table.getDealer().getTotalCardValue()){
+        System.out.println("Player "+player+" Wins! ");
+        table.player(player).betAddToBank();
+      }
+      else {
+        System.out.println("Player " + player +" loses.");
+        table.player(player).betRemoveFromBank();
+      }
+    }
   }
 
   private static void dealCardToPlayer(int player) {
@@ -110,7 +114,6 @@ public class main {
    * outputs the cats on table
    */
   public static void displayCardsOnTable() {
-    System.out.println("the current cards on table");
     for(int player=table.getPlayerCount(); player>0;player-=0) { player--;
       System.out.print( "\nPlayer " + (player) + ": " );
       System.out.println(table.player(player).hand());

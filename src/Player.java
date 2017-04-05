@@ -66,7 +66,6 @@ public class Player {
    */
   public void blackjack(){
     currentBet*=1.5;
-    betAddToBank();
   }
 
   /**
@@ -99,6 +98,11 @@ public class Player {
    */
   public int getTotalCardValue(){return hand.currentValue();}
 
+  public void newHand(){this.hand = new Hand();}
+  /**
+   *
+   * @return
+   */
   @Override
   public String toString(){
 
