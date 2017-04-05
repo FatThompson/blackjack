@@ -68,6 +68,11 @@ public class Hand
     //value based on blackjack rules
     return value>21;    
   }
+
+  public int currentValue(){
+    updateBust();
+    return totalValue;
+  }
   
   /**
    * returns the amount of cards in the hand
@@ -77,6 +82,14 @@ public class Hand
     return nonAceCards.size()+aceCards.size();
   }
 
+  /**
+   * get a single card
+   * @param i
+   * @return
+   */
+  public Card card(int i) {
+    return cards().get(i);
+  }
   /**
    * returns an ArrayList of cards in the current hand
    * @return
@@ -94,13 +107,15 @@ public class Hand
   
   @Override
   public String toString(){
-    String hand = "Value: " + totalValue + "\tand Cards: ";
+    String hand = "Hand Value: " + totalValue + "\t Cards: ";
     for (Card card : cards()) {
-      hand+=card.toString(); 
+      hand+=card.toString()+", ";
     }
     
     return hand;    
   }
+
+
 }
 
 

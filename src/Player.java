@@ -8,7 +8,6 @@ public class Player {
   private int bank;
   private double defaultBet;
   private double currentBet;
-  private int totalCardValue;
 
   /**
    * set a default bet value
@@ -18,27 +17,19 @@ public class Player {
     hand = new Hand();
     setBank(bank);
     setDefaultBet(50);
-    totalCardValue =0;
   }
   public Player(int bank,int defaultBet){
-    hand= new Hand();
+    hand = new Hand();
     setBank(bank);
     setDefaultBet(defaultBet);
-    totalCardValue =0;
   };
 
-  /** sets the bet */
+  /**
+   * sets the bet
+   */
   public void setBank(int bank) {
     this.bank = bank;
   }
-
-  /**
-   * the following deals with dealing with bet
-   */
-  public void removeBet(){bank-=defaultBet;}
-  public void addBet(){bank+=defaultBet;}
-  public void blackjack(){bank+=(defaultBet*1.5);}
-
   /**
    * setts the default bet
    * @param defaultBet
@@ -47,22 +38,72 @@ public class Player {
     if(defaultBet>0) this.defaultBet = defaultBet;
   }
 
+  /**
+   * add card to hand
+   * @param card
+   */
+  public void addCardToHand(Card card) {
+    hand.addCard(card);
+  }
+  /**
+   * the following deals with dealing with bet
+   */
+  public void betRemoveFromBank(){
+    bank-=defaultBet;
+    currentBet=defaultBet;
+  }
 
+  /**
+   * add the victory to bank
+   */
+  public void betAddToBank(){
+    bank+=currentBet;
+    currentBet=0;
+  }
+
+  /**
+   * for blackjacks
+   */
+  public void blackjack(){
+    currentBet*=1.5;
+    betAddToBank();
+  }
+
+  /**
+   * returns hand
+   * @return
+   */
+  public Hand hand(){
+    return hand;
+  }
+
+  /**
+   * get a single card from the hand
+   * @param i
+   * @return
+   */
+  public Card card(int i) {
+    return hand.card(i);
+  }
+  /**
+   * returns hards from hand
+   * @return
+   */
   public ArrayList<Card> cards() {
     return hand.cards();
   }
 
-  public void addCardToHand(Card card) {
-    hand.addCard(card);
-    totalCardValue +=card.getValue();
-  }
-
-  public int getTotalCardValue(){return totalCardValue;}
+  /**
+   * get card value from hand
+   * @return
+   */
+  public int getTotalCardValue(){return hand.currentValue();}
 
   @Override
   public String toString(){
 
     return "Bank: "+bank+", Default Bet: " + defaultBet;
   }
+
 
 }

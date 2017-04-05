@@ -92,12 +92,4 @@ public class Deck
 		}
 		return null;
 	}
-
-	private class CardNotFoundException extends Exception {
-		public CardNotFoundException(){
-			super();
-			System.out.println("Card not found exception");
-
-		}
-	}
 }
