@@ -98,7 +98,7 @@ public class Player {
    */
   public int getTotalCardValue(){return hand.currentValue();}
 
-  public void newHand(){this.hand = new Hand();}
+  public void newHand(){this.hand = null; this.hand = new Hand();}
   /**
    *
    * @return

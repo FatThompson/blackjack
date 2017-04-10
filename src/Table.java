@@ -106,13 +106,7 @@ public class Table {
     return deck.drawCard();
   }
 
-  /**
-   * deals dealer his first two cards
-   */
-  public void dealDealer() {
-    dealer.addCardToHand(deck.drawCard());
-    dealer.addCardToHand(deck.drawCard());
-  }
+
 
   /**
    * deals cards to players
@@ -122,6 +116,7 @@ public class Table {
     for (int player = getPlayerCount(); player > 0; player -= 0) {player--;
       this.players.get(player).newHand();
     }
+    dealer.newHand();
 
     if(deck.size()>((getPlayerCount()+1)*3)) {
       //Add the cards in
@@ -129,11 +124,12 @@ public class Table {
         for (int player = getPlayerCount(); player > 0; player -= 0) {player--;
           player(player).addCardToHand(drawCardfromDeck());
         }
-        dealDealer();
+        //give dealer a card too
+        dealer.addCardToHand(deck.drawCard());
       }
-    } else {
+    } else { //not enough cards. shuffle
       deck.shuffleNewDeck();
-
+      //try again
       if (deck.size() > ((getPlayerCount() + 1) * 3)) dealCards();
       else {
         System.out.println("Too many players. can not continue with the round");
@@ -147,7 +143,7 @@ public class Table {
    * deal all of dealers stuff
    */
   public void dealerHitCycle() {
-    while(dealer.getTotalCardValue() <17 ){
+    while(dealer.getTotalCardValue() < 17 ){
       dealer.addCardToHand(drawCardfromDeck());
     }
 
