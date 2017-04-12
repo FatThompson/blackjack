@@ -11,8 +11,16 @@ public class TableTest {
 
     table.addPlayer();
     Assertions.assertEquals(1,table.getPlayerCount());
+    table.addPlayer(1000);
+    Assertions.assertEquals(2,table.getPlayerCount());
+    table.addPlayer(1000,40);
+    Assertions.assertEquals(3,table.getPlayerCount());
+
   }
 
+  /**
+   * test removing a player
+   */
   @Test
   public void testRemovePlayer(){
     Table table = new Table();
@@ -38,4 +46,14 @@ public class TableTest {
     table.dealCards(); Assertions.assertEquals(true,27>table.getDealer().getTotalCardValue(),"Actual Hand Value: "+table.getDealer().getTotalCardValue());
 
   }
+
+
+  /**
+   *
+   */
+  @Test
+  public void testGetDealerShowCard(){
+    
+  }
+
 }
